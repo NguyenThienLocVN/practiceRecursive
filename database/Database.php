@@ -10,7 +10,7 @@ class Database
 		
 		// If error
 		if(!$this->conn) {
-			echo "Failed to connect to : " . mysql_connect_error($this->conn);
+			echo "Failed to connect to database";
         }
     }
 

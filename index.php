@@ -15,10 +15,8 @@ while ($row = mysqli_fetch_assoc($result)){
 class showData extends Database
 {
     
-    function showCategories($categories, $parent_id = 0, $char = '')
+    function showCategories($categories, $parent_id = 0, $text = '')
     {
-        
-        
         foreach ($categories as $item)
         {
             //Show data
@@ -26,12 +24,12 @@ class showData extends Database
             {
                 echo '<ul>';
                     echo '<li>';
-                        echo $char . $item['name']."<br>";
+                        echo $text . $item['name']."<br>";
                     echo '</li>';
                 echo '</ul>';
                 
                 // Recursive to show sub-categories.
-                showCategories($categories, $item['menu_id'], $char.'---');
+                showCategories($categories, $item['menu_id'], $text.'---');
             }
         }
     }
