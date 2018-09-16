@@ -3,6 +3,7 @@
 
 include 'database/Database.php';
 
+// Query data
 $db = new Database();
 $result = mysqli_query($db->conn, "select * from menu" );
 
@@ -11,7 +12,8 @@ $categories = array();
 while ($row = mysqli_fetch_assoc($result)){
     $categories[] = $row;
 }
-         
+    
+// Class to show data
 class showData extends Database
 {
     
