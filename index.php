@@ -3,40 +3,30 @@
 
 include 'database/Database.php';
 
-// Query data
-$db = new Database();
-$result = mysqli_query($db->conn, "select * from menu" );
-
-$categories = array();
-
-while ($row = mysqli_fetch_assoc($result)){
-    $categories[] = $row;
-}
-    
 // Class to show data
-class showData extends Database
+class ShowTreeMenu extends Database
 {
     
-    function showCategories($categories, $parent_id = 0, $text = '')
-    {
-        foreach ($categories as $item)
+    function showCategory($categories , $parent_id = 0)
+    {   
+        $temp_array = array();
+        foreach ($this->categories as $item)
         {
             //Show data
             if ($item['parent_id'] == $parent_id)
             {
-                echo '<ul>';
-                    echo '<li>';
-                        echo $text . $item['name']."<br>";
-                    echo '</li>';
-                echo '</ul>';
-                
+                echo $item['name']."<br>";
                 // Recursive to show sub-categories.
-                $this->showCategories($categories, $item['menu_id'], $text.'---');
+                $item[] = $this->showCategory($categories, $item['menu_id']);
+                
             }
         }
+        return $item['name'];
     }
+
 }
 
-$show = new showData();
-$show->showCategories($categories);
+$treeMenu = new ShowTreeMenu();
+$treeMenu->showCategory($categories);
+// $treeMenu->orderedMenu($categories,0);
 ?>
