@@ -6,27 +6,41 @@ include 'database/Database.php';
 // Class to show data
 class ShowTreeMenu extends Database
 {
-    
-    function showCategory($categories , $parent_id = 0)
-    {   
-        $temp_array = array();
-        foreach ($this->categories as $item)
-        {
-            //Show data
-            if ($item['parent_id'] == $parent_id)
-            {
-                echo $item['name']."<br>";
-                // Recursive to show sub-categories.
-                $item[] = $this->showCategory($categories, $item['menu_id']);
-                
+
+    public function trueStatus($categories, $parent_id = 0)
+    {
+        $menu_html = '<ul>';
+        foreach ($this->categories as $value) {
+            if ($value['parent_id'] == $parent_id) {
+                // echo $value['name'];
+                $menu_html .= '<li>' . $value['name'];
+                $menu_html .= $this->trueStatus($categories, $value['menu_id']) . '</li>';
             }
         }
-        return $item['name'];
+        $menu_html .= '</ul>';
+        return $menu_html;
     }
 
+    public function checkStatus($bool = true)
+    {
+        if ($bool != true) 
+        {
+            echo($this->menu_html);
+        } 
+        else
+        {
+            return $this->trueStatus();
+            var_dump($this->menu_html);
+        }
+    }
 }
 
 $treeMenu = new ShowTreeMenu();
-$treeMenu->showCategory($categories);
+// $treeMenu->trueStatus($categories, 0);
+$treeMenu->checkStatus(true);
+
+echo($treeMenu->trueStatus($categories,0));
+
+// $treeMenu->showTreeItem($categories, 0, true);
 // $treeMenu->orderedMenu($categories,0);
 ?>
