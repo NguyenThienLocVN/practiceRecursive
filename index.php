@@ -9,6 +9,7 @@ class ShowTreeMenu extends Database
 
     public function showItem($categories, $parent_id = 0, $bool = true)
     {
+        // Build HTML
         $menu_html = '<ul>';
         foreach ($this->categories as $value) {
             if ($value['parent_id'] == $parent_id) {
@@ -18,10 +19,12 @@ class ShowTreeMenu extends Database
         }
         $menu_html .= '</ul>';
         
+        // If true, store data
         if($bool)
         {
             return $menu_html;
         }
+        // If false, print data
         else
         {
             echo($menu_html);
