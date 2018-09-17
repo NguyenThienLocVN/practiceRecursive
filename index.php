@@ -7,13 +7,13 @@ include 'database/Database.php';
 class ShowTreeMenu extends Database
 {
 
-    public function trueStatus($categories, $parent_id = 0, $bool = true)
+    public function showItem($categories, $parent_id = 0, $bool = true)
     {
         $menu_html = '<ul>';
         foreach ($this->categories as $value) {
             if ($value['parent_id'] == $parent_id) {
                 $menu_html .= '<li>' . $value['name'];
-                $menu_html .= $this->trueStatus($categories, $value['menu_id'], true) . '</li>';
+                $menu_html .= $this->showItem($categories, $value['menu_id'], true) . '</li>';
             }
         }
         $menu_html .= '</ul>';
@@ -31,5 +31,5 @@ class ShowTreeMenu extends Database
 
 $treeMenu = new ShowTreeMenu();
 
-$treeMenu->trueStatus($categories, 0, false);
+$treeMenu->showItem($categories, 0, false);
 ?>
