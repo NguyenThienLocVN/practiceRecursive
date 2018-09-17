@@ -31,7 +31,7 @@ class showData extends Database
                 echo '</ul>';
                 
                 // Recursive to show sub-categories.
-                showCategories($categories, $item['menu_id'], $text.'---');
+                $this->showCategories($categories, $item['menu_id'], $text.'---');
             }
         }
     }
