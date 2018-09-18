@@ -18,7 +18,7 @@ class MenuTree extends Database
         }
         $menu_html .= '</ul>';
         
-        // If true, store data
+        // If true, return data
         if($bool == true)
         {
             return $menu_html;
