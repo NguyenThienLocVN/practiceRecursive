@@ -4,9 +4,8 @@
 include 'database/Database.php';
 
 // Class to show data
-class ShowTreeMenu extends Database
+class MenuTree extends Database
 {
-
     public function showItem($categories, $parent_id = 0, $bool = true)
     {
         // Build HTML
@@ -20,7 +19,7 @@ class ShowTreeMenu extends Database
         $menu_html .= '</ul>';
         
         // If true, store data
-        if($bool)
+        if($bool == true)
         {
             return $menu_html;
         }
@@ -32,7 +31,7 @@ class ShowTreeMenu extends Database
     }
 }
 
-$treeMenu = new ShowTreeMenu();
+$treeMenu = new MenuTree();
 
 $treeMenu->showItem($categories, 0, false);
 ?>
